@@ -3,12 +3,14 @@ package Test;
 import java.util.ArrayList;
 import Classes.Student;
 import Classes.Account;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 
 public class TestData
 {
-	public ArrayList<Student> studentList()
+	public ObservableList<Student> studentList()
 	{
-		ArrayList<Student> db = new ArrayList<Student>();
+		ObservableList<Student> db = FXCollections.observableArrayList();
 		
 		db.add(new Student(1,"Emma","Smith","12/04/1997","IT-02-A"));
 		db.add(new Student(2,"Jack","Brown","08/07/1993","IT-02-A"));

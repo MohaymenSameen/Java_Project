@@ -15,23 +15,15 @@ public class Account
 		this.username = username;
 		this.password = password;
 	}	
-	public Account login(ArrayList<Account> accounts)
-	{
-		UserInput input = new UserInput();
-		String username = input.readString("Enter username: ");
-		String password = input.readString("Enter password: ");
-		
+	public boolean login(ArrayList<Account> accounts,String username, String password)
+	{		
 		for(Account account: accounts)
 		{
 			if(account.username.equals(username) && account.password.equals(password))
 			{
-				System.out.print("You have logged in");
-			}	
-			else
-			{
-				System.out.print("Please check in details");
-			}
+				return true;
+			}			
 		}
-		return null;
+		return false;
 	}	
 }
