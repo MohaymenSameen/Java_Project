@@ -29,6 +29,8 @@ public class MenuItem
 		dateOfBirth.setCellValueFactory(new PropertyValueFactory<>("birthDate"));
 		TableColumn<Student, String> group = new TableColumn<>("Group");			
 		group.setCellValueFactory(new PropertyValueFactory<>("group"));		
+			
+		tableView.getColumns().addAll(id,firstName,lastName,dateOfBirth,group);
 		
 		tableView.setItems(students);
 		
