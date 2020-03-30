@@ -107,7 +107,7 @@ public class Program extends Application
 		dis.displayStudent(db);
 		
 		form.getChildren().addAll(dis.displayStudent(db));
-		Scene scene = new Scene(form,1280,720);
+		Scene scene = new Scene(form,600,400);
 		window.setScene(scene);
 		window.show();		
 	}
