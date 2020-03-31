@@ -36,5 +36,28 @@ public class MenuItem
 		
 		return tableView;
 		
-	}	
+	}
+	public TableView<Teacher> displayTeacher(ObservableList<Teacher> teachers)
+	{	
+		TableView<Teacher> tableView = new TableView<>();
+		tableView.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
+		
+		TableColumn<Teacher, String> id = new TableColumn<>("Id");
+		id.setCellValueFactory(new PropertyValueFactory<>("id"));
+		TableColumn<Teacher, String> firstName = new TableColumn<>("First Name");
+		firstName.setCellValueFactory(new PropertyValueFactory<>("firstName"));
+		TableColumn<Teacher, String> lastName = new TableColumn<>("Last Name");
+		lastName.setCellValueFactory(new PropertyValueFactory<>("lastName"));
+		TableColumn<Teacher, String> dateOfBirth = new TableColumn<>("Date Of Birth");
+		dateOfBirth.setCellValueFactory(new PropertyValueFactory<>("birthDate"));
+		TableColumn<Teacher, String> salary = new TableColumn<>("Salary");			
+		salary.setCellValueFactory(new PropertyValueFactory<>("salary"));		
+			
+		tableView.getColumns().addAll(id,firstName,lastName,dateOfBirth,salary);
+		
+		tableView.setItems(teachers);
+		
+		return tableView;
+		
+	}
 }

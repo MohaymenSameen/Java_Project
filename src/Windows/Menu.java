@@ -2,6 +2,7 @@ package Windows;
 
 import Classes.MenuItem;
 import Classes.Student;
+import Classes.Teacher;
 import Test.TestData;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -30,7 +31,15 @@ public class Menu
 				displayStudents(window);				
 			}
 		});
-		menu.getChildren().addAll(displayStudents);
+		Button displayTeachers = new Button("Display Teachers");
+		displayTeachers.setOnAction(new EventHandler<ActionEvent>()
+		{
+			public void handle(ActionEvent event)
+			{
+				displayTeachers(window);				
+			}
+		});
+		menu.getChildren().addAll(displayStudents,displayTeachers);
 		window.setScene(scene);
 		window.show();
 	}
@@ -38,9 +47,10 @@ public class Menu
 	{	
 		HBox form = new HBox();
 		Button back = new Button("Back");
-		back.setOnAction(actionEvent -> {
-			backButton(back);
-		});
+		back.setOnAction(actionEvent ->
+		{			
+			backButton(back,window);
+		});	
 		form.setPadding(new Insets(10,10,10,10));
 		form.setSpacing(10);
 		TestData data = new TestData();
@@ -51,14 +61,28 @@ public class Menu
 		Scene scene = new Scene(form,600,400);
 		window.setScene(scene);		
 	}
-	public void backButton(Button button)
+	public void displayTeachers(Stage window)
 	{
-		button.setOnAction(new EventHandler<ActionEvent>()
-		{
-			public void handle(ActionEvent event)
-			{
-				menuDisplay();				
-			}
-		});
+		HBox form = new HBox();
+		Button back = new Button("Back");
+		back.setOnAction(actionEvent ->
+		{			
+			backButton(back,window);
+		});	
+		
+		form.setPadding(new Insets(10,10,10,10));
+		form.setSpacing(10);
+		TestData data = new TestData();
+		ObservableList<Teacher> db = data.teacherList();
+		MenuItem dis = new MenuItem();
+		dis.displayTeacher(db);		
+		form.getChildren().addAll(dis.displayTeacher(db),back);
+		Scene scene = new Scene(form,600,400);
+		window.setScene(scene);
+	}
+	public void backButton(Button button,Stage window)
+	{		
+		window.close();
+		menuDisplay();		
 	}
 }
