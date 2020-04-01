@@ -9,6 +9,7 @@ public class Person
 	public String firstName;
 	public String lastName;
 	public String birthDate;
+	public Account account;
 	
 	public Person(int id, String firstName, String lastName, String birthDate)
 	{
@@ -48,6 +49,14 @@ public class Person
 	public void setBirthDate(String birthDate)
 	{
 		this.birthDate = birthDate;
+	}
+	public Account getAccount()
+	{
+		return account;
+	}
+	public void setAccount(Account account)
+	{
+		this.account = account;
 	}
 	/*public int getAge(String birthDate)
 	{		

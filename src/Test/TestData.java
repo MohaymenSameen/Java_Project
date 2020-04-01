@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import Classes.Student;
 import Classes.Account;
 import Classes.Teacher;
+import Enum.AccessType;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 
@@ -42,7 +43,9 @@ public class TestData
 	{
 		ArrayList<Account> db = new ArrayList<Account>();
 		
-		db.add(new Account("ema","emma12"));
+		db.add(new Account("ema","emma12",AccessType.BASIC));
+		db.add(new Account("david","david12",AccessType.EDITOR));
+		db.add(new Account("ben","ben12",AccessType.ADMIN));		
 		
 		return db;		
 	}
