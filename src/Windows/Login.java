@@ -4,6 +4,7 @@ import java.util.ArrayList;
 
 import Classes.Account;
 import Test.TestData;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.geometry.Insets;
@@ -22,7 +23,7 @@ public class Login
 	{
 		TestData data = new TestData();
 		Account account = new Account();		
-		ArrayList<Account> accounts = data.accountList();
+		ObservableList<Account> accounts = data.accountList();
 		Stage window = new Stage();
 		window.setTitle("Login Screen");
 

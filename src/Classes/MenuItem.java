@@ -37,6 +37,11 @@ public class MenuItem
 		return tableView;
 		
 	}
+	public TableView<Course> displayResults(TableView<Student> students, ObservableList<Student> student,ObservableList<Course> courses)
+	{
+		students = displayStudent(student);
+		
+	}
 	public TableView<Teacher> displayTeacher(ObservableList<Teacher> teachers)
 	{	
 		TableView<Teacher> tableView = new TableView<>();
@@ -60,4 +65,5 @@ public class MenuItem
 		return tableView;
 		
 	}
+	
 }

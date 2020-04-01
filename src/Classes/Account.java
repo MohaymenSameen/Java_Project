@@ -3,6 +3,7 @@ package Classes;
 import java.util.ArrayList;
 import Classes.UserInput;
 import Enum.AccessType;
+import javafx.collections.ObservableList;
 
 public class Account
 {
@@ -18,7 +19,7 @@ public class Account
 		this.password = password;
 		this.accessType = accessType;
 	}	
-	public boolean login(ArrayList<Account> accounts,String username, String password)
+	public boolean login(ObservableList<Account> accounts,String username, String password)
 	{		
 		for(Account account: accounts)
 		{

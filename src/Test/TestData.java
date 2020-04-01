@@ -39,9 +39,9 @@ public class TestData
 		
 		return db;
 	}
-	public ArrayList<Account> accountList()
+	public ObservableList<Account> accountList()
 	{
-		ArrayList<Account> db = new ArrayList<Account>();
+		ObservableList<Account> db = FXCollections.observableArrayList();
 		
 		db.add(new Account("ema","emma12",AccessType.BASIC));
 		db.add(new Account("david","david12",AccessType.EDITOR));
