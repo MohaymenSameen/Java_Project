@@ -1,6 +1,7 @@
 package Classes;
 
 import Enum.CourseType;
+import javafx.collections.ObservableList;
 
 public class Course
 {
@@ -15,7 +16,7 @@ public class Course
 	{
 		this.courseName = courseName;
 		this.grade = grade;
-	}	
+	}		
 	public CourseType getCourseName()
 	{
 		return courseName;

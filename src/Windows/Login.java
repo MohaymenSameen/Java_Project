@@ -66,7 +66,7 @@ public class Login
 				else 
 				{
 					logIn.setText("Wrong Email/Password Combination");
-				}
+				} 
 				
 			}
 		});

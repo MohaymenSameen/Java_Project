@@ -46,7 +46,15 @@ public class Menu
 				displayTeachers(window);				
 			}
 		});
-		menu.getChildren().addAll(displayStudents,displayTeachers);
+		Button displayResults = new Button("Display Results");
+		displayResults.setOnAction(new EventHandler<ActionEvent>()
+		{
+			public void handle(ActionEvent event)
+			{
+				displayResults(window);				
+			}
+		});
+		menu.getChildren().addAll(displayStudents,displayTeachers,displayResults);
 		window.setScene(scene);
 		window.show();
 	}
@@ -61,7 +69,7 @@ public class Menu
 		form.setPadding(new Insets(10,10,10,10));
 		form.setSpacing(10);
 		TestData data = new TestData();
-		ObservableList<Student> db = data.studentList();
+		ObservableList<Student> db = data.studentList();		
 		ObservableList<Account> accounts = data.accountList();
 		MenuItem dis = new MenuItem();
 		Button add = new Button("Add");
@@ -110,7 +118,27 @@ public class Menu
 			db.remove(view.getSelectionModel().getSelectedItem());			
 		});	
 		form.getChildren().addAll(view,idInput,userNameInput,passwordInput,firstNameInput,lastNameInput,birthDateInput,groupInput,add,delete,back);
-		Scene scene = new Scene(form,400,500);
+		Scene scene = new Scene(form,600,600);
+		window.setScene(scene);		
+	}
+	public void displayResults(Stage window)
+	{	
+		VBox form = new VBox();
+		Button back = new Button("Back");
+		back.setOnAction(actionEvent ->
+		{			
+			backButton(back,window);
+		});	
+		form.setPadding(new Insets(10,10,10,10));
+		form.setSpacing(10);
+		TestData data = new TestData();
+		ObservableList<Student> db = data.studentList();		
+		MenuItem dis = new MenuItem();		
+		
+		TableView<Student> view = dis.displayResults(db);	
+		
+		form.getChildren().addAll(view);
+		Scene scene = new Scene(form,600,600);
 		window.setScene(scene);		
 	}
 	public void displayTeachers(Stage window)
@@ -131,11 +159,7 @@ public class Menu
 		form.getChildren().addAll(dis.displayTeacher(db),back);
 		Scene scene = new Scene(form,600,400);
 		window.setScene(scene);
-	}
-	public void addStudents()
-	{
-		
-	}
+	}	
 	public void backButton(Button button,Stage window)
 	{		
 		window.close();

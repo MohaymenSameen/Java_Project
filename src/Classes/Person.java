@@ -11,6 +11,7 @@ public class Person
 	public String birthDate;
 	public Account account;
 	
+	public Person() {}
 	public Person(int id, String firstName, String lastName, String birthDate)
 	{
 		this.id = id;

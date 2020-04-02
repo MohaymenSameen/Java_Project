@@ -21,26 +21,63 @@ public class MenuItem
 		
 		TableColumn<Student, String> id = new TableColumn<>("Id");
 		id.setCellValueFactory(new PropertyValueFactory<>("id"));
+		
 		TableColumn<Student, String> firstName = new TableColumn<>("First Name");
 		firstName.setCellValueFactory(new PropertyValueFactory<>("firstName"));
+		
 		TableColumn<Student, String> lastName = new TableColumn<>("Last Name");
 		lastName.setCellValueFactory(new PropertyValueFactory<>("lastName"));
+		
 		TableColumn<Student, String> dateOfBirth = new TableColumn<>("Date Of Birth");
 		dateOfBirth.setCellValueFactory(new PropertyValueFactory<>("birthDate"));
+		
 		TableColumn<Student, String> group = new TableColumn<>("Group");			
-		group.setCellValueFactory(new PropertyValueFactory<>("group"));		
-			
+		group.setCellValueFactory(new PropertyValueFactory<>("group"));			
+		
 		tableView.getColumns().addAll(id,firstName,lastName,dateOfBirth,group);
 		
 		tableView.setItems(students);
 		
-		return tableView;
-		
+		return tableView;		
 	}
-	public TableView<Course> displayResults(TableView<Student> students, ObservableList<Student> student,ObservableList<Course> courses)
-	{
-		students = displayStudent(student);
+	public TableView<Student> displayResults(ObservableList<Student> students)
+	{	
+		TableView<Student> tableView = new TableView<>();
+		tableView.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
 		
+		TableColumn<Student, String> id = new TableColumn<>("Id");
+		id.setCellValueFactory(new PropertyValueFactory<>("id"));
+		
+		TableColumn<Student, String> firstName = new TableColumn<>("First Name");
+		firstName.setCellValueFactory(new PropertyValueFactory<>("firstName"));
+		
+		TableColumn<Student, String> lastName = new TableColumn<>("Last Name");
+		lastName.setCellValueFactory(new PropertyValueFactory<>("lastName"));
+		
+		TableColumn<Student, String> dateOfBirth = new TableColumn<>("Date Of Birth");
+		dateOfBirth.setCellValueFactory(new PropertyValueFactory<>("birthDate"));
+		
+		TableColumn<Student, String> group = new TableColumn<>("Group");			
+		group.setCellValueFactory(new PropertyValueFactory<>("group"));	
+		
+		TableColumn<Student, String> java = new TableColumn<>("Java");			
+		java.setCellValueFactory(new PropertyValueFactory<>("group"));			
+		
+		TableColumn<Student, String> csharp = new TableColumn<>("C#");			
+		csharp.setCellValueFactory(new PropertyValueFactory<>("group"));	
+		
+		TableColumn<Student, String> php = new TableColumn<>("Php");			
+		php.setCellValueFactory(new PropertyValueFactory<>("group"));	
+		
+		TableColumn<Student, String> python = new TableColumn<>("Python");			
+		python.setCellValueFactory(new PropertyValueFactory<>("group"));	
+		
+		
+		tableView.getColumns().addAll(id,firstName,lastName,dateOfBirth,java,csharp,php,python,group);
+		
+		tableView.setItems(students);
+		
+		return tableView;		
 	}
 	public TableView<Teacher> displayTeacher(ObservableList<Teacher> teachers)
 	{	
