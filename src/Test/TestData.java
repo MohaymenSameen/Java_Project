@@ -18,7 +18,7 @@ public class TestData
 		
 		//db.add(new Student(1,"Emma","Smith","12/04/1997","IT-02-A"));
 		Student emma = new Student(1,"Emma","Smith","12/04/1997","IT-02-A");
-		emma.results(54,50,66,54);
+		//emma.getCourses(54,50,66,54);
 		db.add(emma);
 		/*db.add(new Student(2,"Jack","Brown","08/07/1993","IT-02-A"));
 		db.add(new Student(3,"Michael","Gracia","11/01/1999","IT-02-A"));

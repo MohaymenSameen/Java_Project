@@ -16,15 +16,19 @@ public class Student extends Person
 	}
 	public ObservableList<Course> results(int grade1,int grade2,int grade3,int grade4)
 	{
-		ObservableList<Course> course = FXCollections.observableArrayList();
-		course.add(new Course(CourseType.JAVA,grade1));
-		course.add(new Course(CourseType.CSHARP,grade2));
-		course.add(new Course(CourseType.PHP,grade3));
-		course.add(new Course(CourseType.PYTHON,grade4));
-		courses = course;
+		courses = FXCollections.observableArrayList();
+		courses.add(new Course(CourseType.JAVA,grade1));
+		courses.add(new Course(CourseType.CSHARP,grade2));
+		courses.add(new Course(CourseType.PHP,grade3));
+		courses.add(new Course(CourseType.PYTHON,grade4));		
 		
-		return course;
+		return courses;
 	}
+	public ObservableList<Course> getCourses()
+	{		
+		return results(grade1,grade2,grade3,grad4);		
+	}
+		
 	/*public void displayResults(ObservableList<Student> students)
 	{
 		for(Student student: students)
@@ -35,7 +39,7 @@ public class Student extends Person
 			System.out.println(student.group);
 			displayCourses(student.courses);
 		}
-	}
+	}*/
 	public void displayCourses(ObservableList<Course> courses)
 	{
 		for(Course course: courses)
@@ -43,7 +47,7 @@ public class Student extends Person
 			System.out.println(course.courseName);
 			System.out.println(course.grade);
 		}
-	}*/
+	}
 	public String getGroup()
 	{
 		return group;

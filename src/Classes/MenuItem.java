@@ -42,7 +42,7 @@ public class MenuItem
 	}
 	public TableView<Student> displayResults(ObservableList<Student> students)
 	{	
-		TableView<Student> tableView = new TableView<>();
+		TableView<Student> tableView = new TableView<>();		
 		tableView.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
 		
 		TableColumn<Student, String> id = new TableColumn<>("Id");
@@ -60,20 +60,20 @@ public class MenuItem
 		TableColumn<Student, String> group = new TableColumn<>("Group");			
 		group.setCellValueFactory(new PropertyValueFactory<>("group"));	
 		
-		TableColumn<Student, String> java = new TableColumn<>("Java");			
-		java.setCellValueFactory(new PropertyValueFactory<>("group"));			
+		TableColumn<Student, String> java = new TableColumn<>("Grades");			
+		java.setCellValueFactory(new PropertyValueFactory<>("courses"));			
 		
-		TableColumn<Student, String> csharp = new TableColumn<>("C#");			
+		/*TableColumn<Student, String> csharp = new TableColumn<>("C#");			
 		csharp.setCellValueFactory(new PropertyValueFactory<>("group"));	
 		
 		TableColumn<Student, String> php = new TableColumn<>("Php");			
 		php.setCellValueFactory(new PropertyValueFactory<>("group"));	
 		
 		TableColumn<Student, String> python = new TableColumn<>("Python");			
-		python.setCellValueFactory(new PropertyValueFactory<>("group"));	
+		python.setCellValueFactory(new PropertyValueFactory<>("group"));	*/
 		
 		
-		tableView.getColumns().addAll(id,firstName,lastName,dateOfBirth,java,csharp,php,python,group);
+		tableView.getColumns().addAll(id,firstName,lastName,dateOfBirth,group,java);
 		
 		tableView.setItems(students);
 		
