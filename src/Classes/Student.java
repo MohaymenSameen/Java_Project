@@ -7,46 +7,69 @@ import javafx.collections.ObservableList;
 public class Student extends Person
 {
 	public String group;
-	public ObservableList<Course> courses;		
+	public ObservableList<Course> results;	
+	public CourseType courseName;
+	public int gradeJava;
+	public int gradeCsharp;
+	public int gradePhp;
+	public int gradePython;
 	
-	public Student(int id,String firstName,String lastName,String birthDate,String group) 
+	public Student(int id,String firstName,String lastName,String birthDate,String group)
 	{
 		super(id,firstName,lastName,birthDate);
-		this.group = group;			
+		this.group = group;
 	}
-	public ObservableList<Course> results(int grade1,int grade2,int grade3,int grade4)
+	public Student(int id,String firstName,String lastName,String birthDate,String group,int gradeJava,int gradeCsharp,int gradePhp, int gradePython) 
 	{
-		courses = FXCollections.observableArrayList();
-		courses.add(new Course(CourseType.JAVA,grade1));
-		courses.add(new Course(CourseType.CSHARP,grade2));
-		courses.add(new Course(CourseType.PHP,grade3));
-		courses.add(new Course(CourseType.PYTHON,grade4));		
-		
-		return courses;
+		super(id,firstName,lastName,birthDate);
+		this.group = group;	
+		this.gradeJava = gradeJava;	
+		this.gradeCsharp = gradeCsharp;	
+		this.gradePhp = gradePhp;	
+		this.gradePython = gradePython;	
+		this.results = results();
+	}	
+	public ObservableList<Course> results()
+	{
+		results = FXCollections.observableArrayList();
+		results.add(new Course(CourseType.JAVA,gradeJava));
+		results.add(new Course(CourseType.CSHARP,gradeCsharp));
+		results.add(new Course(CourseType.PHP,gradePhp));
+		results.add(new Course(CourseType.PYTHON,gradePython));		
+		return results;
 	}
-	public ObservableList<Course> getCourses()
-	{		
-		return results(grade1,grade2,grade3,grad4);		
+	
+	public int getGradeJava()
+	{
+		return gradeJava;
 	}
-		
-	/*public void displayResults(ObservableList<Student> students)
+	public int getGradeCsharp()
 	{
-		for(Student student: students)
-		{
-			System.out.println(student.firstName);
-			System.out.println(student.lastName);
-			System.out.println(student.birthDate);
-			System.out.println(student.group);
-			displayCourses(student.courses);
-		}
-	}*/
-	public void displayCourses(ObservableList<Course> courses)
+		return gradeCsharp;
+	}
+	public int getGradePhp()
 	{
-		for(Course course: courses)
-		{
-			System.out.println(course.courseName);
-			System.out.println(course.grade);
-		}
+		return gradePhp;
+	}
+	public int getGradePython()
+	{
+		return gradePython;
+	}
+	public void setGradeJava(int gradeJava)
+	{
+		this.gradeJava = gradeJava;
+	}
+	public void setGradeCsharp(int gradeCsharp)
+	{
+		this.gradeCsharp = gradeCsharp;
+	}
+	public void setGradePhp(int gradePhp)
+	{
+		this.gradePhp = gradePhp;
+	}
+	public void setGradePython(int gradePython)
+	{
+		this.gradePython = gradePython;
 	}
 	public String getGroup()
 	{

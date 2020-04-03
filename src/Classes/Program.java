@@ -9,7 +9,8 @@ public class Program extends Application
 {
 	public static void main(String[] args)
 	{
-		launch();		
+		launch();	
+		
 	}
 	public void start(Stage window) throws Exception
 	{

@@ -58,22 +58,21 @@ public class MenuItem
 		dateOfBirth.setCellValueFactory(new PropertyValueFactory<>("birthDate"));
 		
 		TableColumn<Student, String> group = new TableColumn<>("Group");			
-		group.setCellValueFactory(new PropertyValueFactory<>("group"));	
+		group.setCellValueFactory(new PropertyValueFactory<>("group"));		
 		
-		TableColumn<Student, String> java = new TableColumn<>("Grades");			
-		java.setCellValueFactory(new PropertyValueFactory<>("courses"));			
+		TableColumn<Student, String> java = new TableColumn<>("Java");			
+		java.setCellValueFactory(new PropertyValueFactory<>("gradeJava"));			
 		
-		/*TableColumn<Student, String> csharp = new TableColumn<>("C#");			
-		csharp.setCellValueFactory(new PropertyValueFactory<>("group"));	
+		TableColumn<Student, String> csharp = new TableColumn<>("C#");			
+		csharp.setCellValueFactory(new PropertyValueFactory<>("gradeCsharp"));	
 		
 		TableColumn<Student, String> php = new TableColumn<>("Php");			
-		php.setCellValueFactory(new PropertyValueFactory<>("group"));	
+		php.setCellValueFactory(new PropertyValueFactory<>("gradePhp"));	
 		
 		TableColumn<Student, String> python = new TableColumn<>("Python");			
-		python.setCellValueFactory(new PropertyValueFactory<>("group"));	*/
+		python.setCellValueFactory(new PropertyValueFactory<>("gradePython"));			
 		
-		
-		tableView.getColumns().addAll(id,firstName,lastName,dateOfBirth,group,java);
+		tableView.getColumns().addAll(id,firstName,lastName,dateOfBirth,group,java,csharp,php,python);
 		
 		tableView.setItems(students);
 		

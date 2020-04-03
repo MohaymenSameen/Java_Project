@@ -16,19 +16,16 @@ public class TestData
 	{
 		ObservableList<Student> db = FXCollections.observableArrayList();
 		
-		//db.add(new Student(1,"Emma","Smith","12/04/1997","IT-02-A"));
-		Student emma = new Student(1,"Emma","Smith","12/04/1997","IT-02-A");
-		//emma.getCourses(54,50,66,54);
-		db.add(emma);
-		/*db.add(new Student(2,"Jack","Brown","08/07/1993","IT-02-A"));
-		db.add(new Student(3,"Michael","Gracia","11/01/1999","IT-02-A"));
-		db.add(new Student(4,"Lisa","Jones","04/29/2000","IT-02-A"));
-		db.add(new Student(5,"John","Miller","10/27/2001","IT-02-A"));
-		db.add(new Student(6,"Linda","Martinez","01/17/2002","IT-02-A"));
-		db.add(new Student(7,"Richard","Davis","09/22/1997","IT-02-A"));
-		db.add(new Student(8,"Mark","Lopez","12/09/1996","IT-02-A"));
-		db.add(new Student(9,"Debora","Hernandez","02/25/1995","IT-02-A"));
-		db.add(new Student(10,"Rick","Moore","03/16/2000","IT-02-A"));*/
+		db.add(new Student(1,"Emma","Smith","12/04/1997","IT-02-A",54,50,66,54));		
+		db.add(new Student(2,"Jack","Brown","08/07/1993","IT-02-A",72,68,43,95));
+		db.add(new Student(3,"Michael","Gracia","11/01/1999","IT-02-A",45,71,55,84));
+		db.add(new Student(4,"Lisa","Jones","04/29/2000","IT-02-A",98,64,81,72));
+		db.add(new Student(5,"John","Miller","10/27/2001","IT-02-A",100,94,99,93));
+		db.add(new Student(6,"Linda","Martinez","01/17/2002","IT-02-A",55,79,81,55));
+		db.add(new Student(7,"Richard","Davis","09/22/1997","IT-02-A",51,64,39,59));
+		db.add(new Student(8,"Mark","Lopez","12/09/1996","IT-02-A",78,98,89,99));
+		db.add(new Student(9,"Debora","Hernandez","02/25/1995","IT-02-A",59,55,67,99));
+		db.add(new Student(10,"Rick","Moore","03/16/2000","IT-02-A",96,87,55,82));
 		
 		return db;
 	}			
