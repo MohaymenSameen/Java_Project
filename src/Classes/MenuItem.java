@@ -1,51 +1,87 @@
 package Classes;
 
+
+import javafx.scene.control.TableColumn.CellEditEvent;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
-
 import Classes.Student;
+import Enum.AccessType;
 import javafx.collections.ObservableList;
 import javafx.scene.control.Label;
 import javafx.scene.control.SelectionMode;
 import javafx.scene.control.TableColumn;
+import javafx.scene.control.TablePosition;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.control.cell.TextFieldTableCell;
+import javafx.scene.input.KeyCode;
+import javafx.util.converter.IntegerStringConverter;
 
 public class MenuItem
 {
-	public TableView<Student> displayStudent(ObservableList<Student> students)
+	TableView<Student> tableView = new TableView<>();
+	public TableView<Student> displayStudent(ObservableList<Student> students, Account account)
 	{	
-		TableView<Student> tableView = new TableView<>();
+		tableView.setEditable(true);
 		tableView.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
 		
-		TableColumn<Student, String> id = new TableColumn<>("Id");
+		TableColumn<Student, Integer> id = new TableColumn<>("Id");
 		id.setCellValueFactory(new PropertyValueFactory<>("id"));
 		
 		TableColumn<Student, String> firstName = new TableColumn<>("First Name");
 		firstName.setCellValueFactory(new PropertyValueFactory<>("firstName"));
+		editFirstName(firstName);
 		
 		TableColumn<Student, String> lastName = new TableColumn<>("Last Name");
 		lastName.setCellValueFactory(new PropertyValueFactory<>("lastName"));
+		editLastName(lastName);
 		
 		TableColumn<Student, String> dateOfBirth = new TableColumn<>("Date Of Birth");
 		dateOfBirth.setCellValueFactory(new PropertyValueFactory<>("birthDate"));
+		editDateOfBirth(dateOfBirth);
 		
 		TableColumn<Student, String> group = new TableColumn<>("Group");			
-		group.setCellValueFactory(new PropertyValueFactory<>("group"));			
+		group.setCellValueFactory(new PropertyValueFactory<>("group"));		
+		editGroup(group);		
 		
-		tableView.getColumns().addAll(id,firstName,lastName,dateOfBirth,group);
+		if(account.accessType == AccessType.EDITOR )
+		{
+			TableColumn<Student, Integer> java = new TableColumn<>("Java");			
+			java.setCellValueFactory(new PropertyValueFactory<>("gradeJava"));			
+			editJavaGrade(java);
+			
+			TableColumn<Student, Integer> csharp = new TableColumn<>("C#");			
+			csharp.setCellValueFactory(new PropertyValueFactory<>("gradeCsharp"));		
+			editCsharpGrade(csharp);
+			
+			TableColumn<Student, Integer> php = new TableColumn<>("Php");			
+			php.setCellValueFactory(new PropertyValueFactory<>("gradePhp"));	
+			editPhpGrade(php);
+			
+			TableColumn<Student, Integer> python = new TableColumn<>("Python");			
+			python.setCellValueFactory(new PropertyValueFactory<>("gradePython"));			
+			editPythonGrade(python);
+			
+			tableView.getColumns().addAll(java,csharp,php,python);	
+			tableView.setItems(students);
+		}
+		else
+		{
+			tableView.getColumns().addAll(id,firstName,lastName,dateOfBirth,group);				
+			tableView.setItems(students);
+		}
 		
-		tableView.setItems(students);
+		
 		
 		return tableView;		
-	}
-	public TableView<Student> displayResults(ObservableList<Student> students)
+	}	
+	/*public TableView<Student> displayResults(ObservableList<Student> students)
 	{	
-		TableView<Student> tableView = new TableView<>();		
+		tableView.setEditable(true);				
 		tableView.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
 		
-		TableColumn<Student, String> id = new TableColumn<>("Id");
+		TableColumn<Student, Integer> id = new TableColumn<>("Id");
 		id.setCellValueFactory(new PropertyValueFactory<>("id"));
 		
 		TableColumn<Student, String> firstName = new TableColumn<>("First Name");
@@ -60,30 +96,34 @@ public class MenuItem
 		TableColumn<Student, String> group = new TableColumn<>("Group");			
 		group.setCellValueFactory(new PropertyValueFactory<>("group"));		
 		
-		TableColumn<Student, String> java = new TableColumn<>("Java");			
+		TableColumn<Student, Integer> java = new TableColumn<>("Java");			
 		java.setCellValueFactory(new PropertyValueFactory<>("gradeJava"));			
+		editJavaGrade(java);
 		
-		TableColumn<Student, String> csharp = new TableColumn<>("C#");			
-		csharp.setCellValueFactory(new PropertyValueFactory<>("gradeCsharp"));	
+		TableColumn<Student, Integer> csharp = new TableColumn<>("C#");			
+		csharp.setCellValueFactory(new PropertyValueFactory<>("gradeCsharp"));		
+		editCsharpGrade(csharp);
 		
-		TableColumn<Student, String> php = new TableColumn<>("Php");			
+		TableColumn<Student, Integer> php = new TableColumn<>("Php");			
 		php.setCellValueFactory(new PropertyValueFactory<>("gradePhp"));	
+		editPhpGrade(php);
 		
-		TableColumn<Student, String> python = new TableColumn<>("Python");			
+		TableColumn<Student, Integer> python = new TableColumn<>("Python");			
 		python.setCellValueFactory(new PropertyValueFactory<>("gradePython"));			
+		editPythonGrade(python);
 		
 		tableView.getColumns().addAll(id,firstName,lastName,dateOfBirth,group,java,csharp,php,python);
 		
 		tableView.setItems(students);
 		
 		return tableView;		
-	}
+	}*/
 	public TableView<Teacher> displayTeacher(ObservableList<Teacher> teachers)
 	{	
 		TableView<Teacher> tableView = new TableView<>();
 		tableView.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
 		
-		TableColumn<Teacher, String> id = new TableColumn<>("Id");
+		TableColumn<Teacher, Integer> id = new TableColumn<>("Id");
 		id.setCellValueFactory(new PropertyValueFactory<>("id"));
 		TableColumn<Teacher, String> firstName = new TableColumn<>("First Name");
 		firstName.setCellValueFactory(new PropertyValueFactory<>("firstName"));
@@ -100,6 +140,109 @@ public class MenuItem
 		
 		return tableView;
 		
+	}	
+	public void editFirstName(TableColumn<Student,String> firstName)
+	{
+		firstName.setCellFactory(TextFieldTableCell.<Student>forTableColumn());
+		firstName.setOnEditCommit
+		(
+			(CellEditEvent<Student, String> t) ->
+				{
+			        ((Student) t.getTableView().getItems().get(
+		            t.getTablePosition().getRow())
+		            ).setFirstName(t.getNewValue());
+			}
+			);
 	}
-	
+	public void editLastName(TableColumn<Student,String> lastName)
+	{
+		lastName.setCellFactory(TextFieldTableCell.<Student>forTableColumn());
+		lastName.setOnEditCommit
+		(
+			(CellEditEvent<Student, String> t) ->
+				{
+			        ((Student) t.getTableView().getItems().get(
+		            t.getTablePosition().getRow())
+		            ).setLastName(t.getNewValue());
+			}
+			);
+	}
+	public void editDateOfBirth(TableColumn<Student,String> dateOfBirth)
+	{
+		dateOfBirth.setCellFactory(TextFieldTableCell.<Student>forTableColumn());
+		dateOfBirth.setOnEditCommit
+		(
+			(CellEditEvent<Student, String> t) ->
+				{
+			        ((Student) t.getTableView().getItems().get(
+		            t.getTablePosition().getRow())
+		            ).setBirthDate(t.getNewValue());
+			}
+			);
+	}
+	public void editGroup(TableColumn<Student,String> group)
+	{
+		group.setCellFactory(TextFieldTableCell.<Student>forTableColumn());
+		group.setOnEditCommit
+		(
+			(CellEditEvent<Student, String> t) ->
+				{
+			        ((Student) t.getTableView().getItems().get(
+		            t.getTablePosition().getRow())
+		            ).setGroup(t.getNewValue());
+			}
+			);
+	}
+	public void editJavaGrade(TableColumn<Student,Integer> javaGrade)
+	{		
+		javaGrade.setCellFactory(TextFieldTableCell.forTableColumn(new IntegerStringConverter()));
+		javaGrade.setOnEditCommit
+		(
+			(CellEditEvent<Student, Integer> t) ->
+				{
+			        ((Student) t.getTableView().getItems().get(
+		            t.getTablePosition().getRow())
+		            ).setGradeJava(t.getNewValue());
+			}
+			);        
+	}	
+	public void editCsharpGrade(TableColumn<Student,Integer> csharpGrade)
+	{		
+		csharpGrade.setCellFactory(TextFieldTableCell.forTableColumn(new IntegerStringConverter()));
+		csharpGrade.setOnEditCommit
+		(
+			(CellEditEvent<Student, Integer> t) ->
+				{
+			        ((Student) t.getTableView().getItems().get(
+		            t.getTablePosition().getRow())
+		            ).setGradeCsharp(t.getNewValue());
+			}
+			);        
+	}
+	public void editPhpGrade(TableColumn<Student,Integer> phpGrade)
+	{		
+		phpGrade.setCellFactory(TextFieldTableCell.forTableColumn(new IntegerStringConverter()));
+		phpGrade.setOnEditCommit
+		(
+			(CellEditEvent<Student, Integer> t) ->
+				{
+			        ((Student) t.getTableView().getItems().get(
+		            t.getTablePosition().getRow())
+		            ).setGradePhp(t.getNewValue());
+			}
+			);        
+	}
+	public void editPythonGrade(TableColumn<Student,Integer> pythonGrade)
+	{		
+		pythonGrade.setCellFactory(TextFieldTableCell.forTableColumn(new IntegerStringConverter()));
+		pythonGrade.setOnEditCommit
+		(
+			(CellEditEvent<Student, Integer> t) ->
+				{
+			        ((Student) t.getTableView().getItems().get(
+		            t.getTablePosition().getRow())
+		            ).setGradePython(t.getNewValue());
+			}
+			);        
+	}
 }

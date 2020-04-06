@@ -3,6 +3,8 @@ package Windows;
 import java.util.ArrayList;
 
 import Classes.Account;
+import Classes.Person;
+import Enum.AccessType;
 import Test.TestData;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -22,8 +24,9 @@ public class Login
 	public void login()
 	{
 		TestData data = new TestData();
-		Account account = new Account();		
 		ObservableList<Account> accounts = data.accountList();
+		Account account = new Account();
+		Person person = new Person();
 		Stage window = new Stage();
 		window.setTitle("Login Screen");
 
@@ -61,7 +64,18 @@ public class Login
 				{
 					window.close();
 					Menu menu = new Menu();
-					menu.menuDisplay();
+					menu.menuDisplay(account);
+					
+					if(true)
+					{
+						account.accessLevel(accounts, person);
+						System.out.println("Im a student!!");
+					}
+					else
+					{		
+						account.accessLevel(accounts, person);
+						System.out.println("Im not a student!!");
+					}
 				}
 				else 
 				{

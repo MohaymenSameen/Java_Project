@@ -3,6 +3,9 @@ package Classes;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
+import Enum.AccessType;
+import javafx.collections.ObservableList;
+
 public class Person
 {
 	public int id;
@@ -17,7 +20,7 @@ public class Person
 		this.id = id;
 		this.firstName = firstName;
 		this.lastName = lastName;
-		this.birthDate = birthDate;		
+		this.birthDate = birthDate;			
 	}
 	public int getId()
 	{
@@ -58,6 +61,26 @@ public class Person
 	public void setAccount(Account account)
 	{
 		this.account = account;
+	}
+	public Person accessLevel(ObservableList<Account> accounts)
+	{
+		Person person = new Person();
+		for(Account account: accounts)
+		{
+			if(account.accessType == AccessType.BASIC)
+			{
+				person.account.accessType = AccessType.BASIC;		
+			}
+			else if(account.accessType == AccessType.EDITOR)
+			{
+				person.account.accessType = AccessType.EDITOR;
+			}
+			else
+			{
+				person.account.accessType = AccessType.ADMIN;
+			}
+		}
+		return person;		
 	}
 	/*public int getAge(String birthDate)
 	{		

@@ -12,6 +12,7 @@ import javafx.event.EventHandler;
 import javafx.geometry.Insets;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
@@ -21,7 +22,7 @@ import javafx.stage.Stage;
 
 public class Menu
 {
-	public void menuDisplay()
+	public void menuDisplay(Account account)
 	{
 		Stage window = new Stage();
 		window.setTitle("Menu");
@@ -35,7 +36,7 @@ public class Menu
 			public void handle(ActionEvent event)
 			{
 				window.setTitle("Displaying Student");
-				displayStudents(window);				
+				displayStudents(window,account);				
 			}
 		});
 		Button displayTeachers = new Button("Display Teachers");
@@ -43,7 +44,7 @@ public class Menu
 		{
 			public void handle(ActionEvent event)
 			{
-				displayTeachers(window);				
+				displayTeachers(window,account);				
 			}
 		});
 		Button displayResults = new Button("Display Results");
@@ -51,20 +52,29 @@ public class Menu
 		{
 			public void handle(ActionEvent event)
 			{
-				displayResults(window);				
+				//displayResults(window);				
 			}
 		});
 		menu.getChildren().addAll(displayStudents,displayTeachers,displayResults);
 		window.setScene(scene);
 		window.show();
 	}
-	public void displayStudents(Stage window)
+	public void displayStudents(Stage window, Account account)
 	{	
 		VBox form = new VBox();
 		Button back = new Button("Back");
+		
+		/*if(account.accessType == AccessType.BASIC)
+		{
+			System.out.println("Im a student!!");
+		}
+		else
+		{
+			System.out.println("Im not a student!!");
+		}*/
 		back.setOnAction(actionEvent ->
 		{			
-			backButton(back,window);
+			backButton(back,window,account);
 		});	
 		form.setPadding(new Insets(10,10,10,10));
 		form.setSpacing(10);
@@ -77,10 +87,10 @@ public class Menu
 		
 		TextField idInput = new TextField();
 		idInput.setPromptText("ID");
-		TextField userNameInput = new TextField();
-		userNameInput.setPromptText("User name");
-		PasswordField passwordInput = new PasswordField();
-		passwordInput.setPromptText("Password");
+		//TextField userNameInput = new TextField();
+		//userNameInput.setPromptText("User name");
+		//PasswordField passwordInput = new PasswordField();
+		//passwordInput.setPromptText("Password");
 		TextField firstNameInput = new TextField();
 		firstNameInput.setPromptText("First name");
 		TextField lastNameInput = new TextField();
@@ -89,25 +99,27 @@ public class Menu
 		birthDateInput.setPromptText("Date Of Birth (MM/DD/YYYY)");
 		TextField groupInput = new TextField();
 		groupInput.setPromptText("group");
-		TableView<Student> view = dis.displayStudent(db);	
+		TableView<Student> view = dis.displayStudent(db,account);	
+		view.setEditable(true);		
+	                
 		add.setOnAction(actionEvent ->
 		{
 			int id = Integer.parseInt(idInput.getText());
-			String userName = userNameInput.getText();
-			String password = passwordInput.getText();
+			//String userName = userNameInput.getText();
+			//String password = passwordInput.getText();
 			String firstName = firstNameInput.getText();
 			String lastName = lastNameInput.getText();
 			String birthDate = birthDateInput.getText();
 			String group = groupInput.getText();			
 			Student student = new Student(id,firstName,lastName,birthDate,group);
-			Account account = new Account(userName,password,AccessType.BASIC);
-			
+			//Account account = new Account(userName,password,AccessType.BASIC);
+			 
 			view.getItems().add(student);
-			accounts.add(account);
+			//accounts.add(account);
 			
 			idInput.clear();
-			userNameInput.clear();
-			passwordInput.clear();
+			//userNameInput.clear();
+			//passwordInput.clear();
 			firstNameInput.clear();
 			lastNameInput.clear();
 			birthDateInput.clear();
@@ -117,11 +129,11 @@ public class Menu
 		{			
 			db.remove(view.getSelectionModel().getSelectedItem());			
 		});	
-		form.getChildren().addAll(view,idInput,userNameInput,passwordInput,firstNameInput,lastNameInput,birthDateInput,groupInput,add,delete,back);
+		form.getChildren().addAll(view,idInput,firstNameInput,lastNameInput,birthDateInput,groupInput,add,delete,back);
 		Scene scene = new Scene(form,600,600);
 		window.setScene(scene);		
 	}
-	public void displayResults(Stage window)
+	/*public void displayResults(Stage window)
 	{	
 		VBox form = new VBox();
 		Button back = new Button("Back");
@@ -133,21 +145,34 @@ public class Menu
 		form.setSpacing(10);
 		TestData data = new TestData();
 		ObservableList<Student> db = data.studentList();		
-		MenuItem dis = new MenuItem();		
+		MenuItem dis = new MenuItem();	
 		
-		TableView<Student> view = dis.displayResults(db);	
+		Label java = new Label("Java Grade");
+		TextField javaGradeInput = new TextField();
+				
+		Label csharp = new Label("C# Grade");
+		TextField csharpGradeInput = new TextField();
 		
-		form.getChildren().addAll(view);
+		Label php = new Label("Php Grade");
+		TextField phpGradeInput = new TextField();
+		
+		Label python = new Label("Python Grade");		
+		TextField pythonGradeInput = new TextField();
+		
+		//TableView<Student> view = dis.displayResults(db);	
+		
+		
+		form.getChildren().addAll(java,javaGradeInput,csharp,csharpGradeInput,php,phpGradeInput,python,pythonGradeInput,back);
 		Scene scene = new Scene(form,600,600);
 		window.setScene(scene);		
-	}
-	public void displayTeachers(Stage window)
+	}*/
+	public void displayTeachers(Stage window,Account account)
 	{
 		HBox form = new HBox();
 		Button back = new Button("Back");
 		back.setOnAction(actionEvent ->
 		{			
-			backButton(back,window);
+			backButton(back,window, account);
 		});	
 		
 		form.setPadding(new Insets(10,10,10,10));
@@ -160,9 +185,9 @@ public class Menu
 		Scene scene = new Scene(form,600,400);
 		window.setScene(scene);
 	}	
-	public void backButton(Button button,Stage window)
+	public void backButton(Button button,Stage window, Account account)
 	{		
 		window.close();
-		menuDisplay();		
+		menuDisplay(account);		
 	}
 }
