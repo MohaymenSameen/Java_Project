@@ -1,17 +1,15 @@
 package Test;
 
-import java.util.ArrayList;
 import Classes.Student;
 import Classes.Account;
-import Classes.Course;
 import Classes.Teacher;
 import Enum.AccessType;
-import Enum.CourseType;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 
 public class TestData
 {
+	//test data for tables and accounts
 	public ObservableList<Student> studentList()
 	{
 		ObservableList<Student> db = FXCollections.observableArrayList();

@@ -6,15 +6,13 @@ import javafx.collections.ObservableList;
 
 public class Student extends Person
 {
-	public String group;
-	public ObservableList<Course> results;	
-	public CourseType courseName;
-	public int gradeJava;
-	public int gradeCsharp;
-	public int gradePhp;
-	public int gradePython;
+	private String group;
+	private ObservableList<Course> results;		
+	private int gradeJava;
+	private int gradeCsharp;
+	private int gradePhp;
+	private int gradePython;	
 	
-	public Student() {};
 	public Student(int id,String firstName,String lastName,String birthDate,String group)
 	{
 		super(id,firstName,lastName,birthDate);
@@ -30,6 +28,7 @@ public class Student extends Person
 		this.gradePython = gradePython;	
 		this.results = results();
 	}	
+	//results for each course
 	public ObservableList<Course> results()
 	{
 		results = FXCollections.observableArrayList();

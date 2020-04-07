@@ -32,10 +32,13 @@ public class MenuItem
 		TableColumn<Student, String> group = new TableColumn<>("Group");			
 		group.setCellValueFactory(new PropertyValueFactory<>("group"));					
 		
-		if(account.accessType == AccessType.EDITOR || account.accessType == AccessType.ADMIN)
+		//if accestype is editor or admin, they can do various functionalities
+		if(account.getAccessType() == AccessType.EDITOR || account.getAccessType() == AccessType.ADMIN)
 		{
+			//ablitity to edit table
 			tableView.setEditable(true);
 			
+			//editing selected fields
 			editFirstName(firstName);
 			editLastName(lastName);
 			editDateOfBirth(dateOfBirth);
@@ -68,6 +71,7 @@ public class MenuItem
 		
 		return tableView;		
 	}		
+	@SuppressWarnings("unchecked")
 	public TableView<Teacher> displayTeacher(ObservableList<Teacher> teachers)
 	{	
 		TableView<Teacher> tableView = new TableView<>();
@@ -89,9 +93,11 @@ public class MenuItem
 		tableView.setItems(teachers);
 		
 		return tableView;		
-	}	
+	}
+	
+	//ability to select and edit fields
 	public void editFirstName(TableColumn<Student,String> firstName)
-	{
+	{		
 		firstName.setCellFactory(TextFieldTableCell.<Student>forTableColumn());
 		firstName.setOnEditCommit
 		(

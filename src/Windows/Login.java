@@ -3,8 +3,6 @@ package Windows;
 import Classes.Account;
 import Test.TestData;
 import javafx.collections.ObservableList;
-import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
 import javafx.geometry.Insets;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
@@ -19,55 +17,59 @@ public class Login
 {
 	public void login()
 	{
+		//getting the data
 		TestData data = new TestData();
 		ObservableList<Account> accounts = data.accountList();
-		Account account = new Account();		
+		Account account = new Account();
+		
 		Stage window = new Stage();
 		window.setTitle("Login Screen");
-
 		
 		GridPane gridpane = new GridPane();
 		Scene scene = new Scene(gridpane,400,300);
 		
+		//username 
 		Label username = new Label("Username: ");
 		gridpane.setPadding(new Insets(60,60,60,60));
-		gridpane.setVgap(20); // Vertical spacing between grid items
-		gridpane.setHgap(8); // Horizontal spacing between grid items
-		GridPane.setConstraints(username, 1, 1);
-		
+		gridpane.setVgap(20); 
+		gridpane.setHgap(8); 
+		GridPane.setConstraints(username, 1, 1);		
+		//username input
 		TextField usertext = new TextField();
 		GridPane.setConstraints(usertext,2,1);
 		
+		//password
 		Label passField = new Label("Password: ");
+		//password input
 		PasswordField passwordField = new PasswordField();		
-		
 		GridPane.setConstraints(passField,1,2);
 		GridPane.setConstraints(passwordField,2,2);
 		
-		
+		//login button
 		Button login = new Button("Log In");
 		GridPane.setConstraints(login,2,3); 		
 		
+		//login 
 		Label logIn = new Label();
 		GridPane.setConstraints(logIn,2,4);
-		login.setOnAction(new EventHandler<ActionEvent>()
-		{
-			public void handle(ActionEvent event)
-			{	
-				boolean loggedIn = account.login(accounts, usertext.getText(), passwordField.getText());
-				if(loggedIn == true)
-				{
-					window.close();
-					Menu menu = new Menu();	
-					Account userAccount = account.accessLevel(accounts, usertext.getText(), passwordField.getText());	
-					System.out.println(userAccount.accessType);
-					menu.menuDisplay(userAccount);
-				}
-				else 
-				{
-					logIn.setText("Wrong Email/Password Combination");
-				}				
+		
+		//login button event
+		login.setOnAction(actionEvent->
+		{				
+			boolean loggedIn = account.login(accounts, usertext.getText(), passwordField.getText());
+			if(loggedIn == true)
+			{
+				window.close();
+				Menu menu = new Menu();	
+				//setting the logged in account as the user account throughout application
+				Account userAccount = account.accessLevel(accounts, usertext.getText(), passwordField.getText());	
+				System.out.println(userAccount.getAccessType());
+				menu.menuDisplay(userAccount);
 			}
+			else 
+			{
+				logIn.setText("Wrong Email/Password Combination");
+			}			
 		});
 		gridpane.getChildren().addAll(username,usertext,passField,passwordField,login,logIn);		
 		window.setScene(scene);

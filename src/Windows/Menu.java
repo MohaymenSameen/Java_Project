@@ -1,8 +1,8 @@
 package Windows;
 
 import java.io.FileWriter;
-import java.io.IOException;
 
+import java.io.IOException;
 import Classes.Account;
 import Classes.Course;
 import Classes.MenuItem;
@@ -11,8 +11,6 @@ import Classes.Teacher;
 import Enum.AccessType;
 import Test.TestData;
 import javafx.collections.ObservableList;
-import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
 import javafx.geometry.Insets;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
@@ -25,6 +23,7 @@ import javafx.stage.Stage;
 
 public class Menu
 {
+	//main menu
 	public void menuDisplay(Account account)
 	{
 		Stage window = new Stage();
@@ -33,57 +32,52 @@ public class Menu
 		Scene scene = new Scene(menu,600,400);
 		menu.setPadding(new Insets(10,10,10,10));
 		menu.setSpacing(10);
+		
+		//displaying students
 		Button displayStudents = new Button("Display Students");
-		displayStudents.setOnAction(new EventHandler<ActionEvent>()
-		{
-			public void handle(ActionEvent event)
-			{
-				window.setTitle("Displaying Student");
-				displayStudents(window,account);				
-			}
-		});
-		Button displayTeachers = new Button("Display Teachers");
-		displayTeachers.setOnAction(new EventHandler<ActionEvent>()
-		{
-			public void handle(ActionEvent event)
-			{
-				displayTeachers(window,account);				
-			}
-		});
-		Button editStudents = new Button("Add or Edit students");
-		editStudents.setOnAction(new EventHandler<ActionEvent>()
-		{
-			public void handle(ActionEvent event)
-			{
-				editStudents(window,account);				
-			}
-		});
-		Button downloadReports = new Button("Download Reports");
-		Label clicked = new Label();
-		downloadReports.setOnAction(new EventHandler<ActionEvent>()
-		{
-			public void handle(ActionEvent event)
-			{
-				try 
-				{					
-					downloadReports();
-					clicked.setText("Reports have been sucessfully downloaded");
-				} 
-				catch (IOException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}				
-			}
+		displayStudents.setOnAction(actionEvent->
+		{			
+			window.setTitle("Displaying Student");
+			displayStudents(window,account);			
 		});
 		
-		if(account.accessType == AccessType.ADMIN)
+		//displaying teachers
+		Button displayTeachers = new Button("Display Teachers");
+		displayTeachers.setOnAction(actionEvent->
+		{			
+			displayTeachers(window,account);	
+		});
+		
+		//editing student details
+		Button editStudents = new Button("Add or Edit students");
+		editStudents.setOnAction(actionEvent->
+		{			
+			editStudents(window,account);			
+		});
+		
+		//downloading reports for students
+		Button downloadReports = new Button("Download Reports");
+		Label clicked = new Label();
+		downloadReports.setOnAction(actionEvent->
 		{
-			
+			try 
+			{					
+				downloadReports();
+				clicked.setText("Reports have been sucessfully downloaded");
+			} 
+			catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}			
+		});
+		
+		//If condition for account accesstype with various functionalities
+		if(account.getAccessType() == AccessType.ADMIN)
+		{			
 			menu.getChildren().addAll(displayStudents,editStudents,displayTeachers,downloadReports,clicked);
 		}	
-		else if(account.accessType == AccessType.EDITOR)
-		{
-			
+		else if(account.getAccessType() == AccessType.EDITOR)
+		{			
 			menu.getChildren().addAll(displayStudents,displayTeachers,editStudents);
 		}
 		else
@@ -98,6 +92,7 @@ public class Menu
 	{	
 		VBox form = new VBox();
 		
+		//back button
 		Button back = new Button("Back");			
 		back.setOnAction(actionEvent ->
 		{			
@@ -138,6 +133,7 @@ public class Menu
 		Button add = new Button("Add");
 		Button delete = new Button("delete");
 		
+		//input fields
 		TextField idInput = new TextField();
 		idInput.setPromptText("ID");
 		TextField firstNameInput = new TextField();
@@ -149,6 +145,7 @@ public class Menu
 		TextField groupInput = new TextField();
 		groupInput.setPromptText("group");    
 		
+		//add button event
 		add.setOnAction(actionEvent ->
 		{
 			int id = Integer.parseInt(idInput.getText());			
@@ -166,6 +163,8 @@ public class Menu
 			birthDateInput.clear();
 			groupInput.clear();			
 		});
+		
+		//delete button event
 		delete.setOnAction(actionEvent ->
 		{			
 			db.remove(view.getSelectionModel().getSelectedItem());			
@@ -202,20 +201,20 @@ public class Menu
 		{
 			int count=0;
 			String passed="";
-			String filename = String.format("%d %s %s.txt",student.id,student.firstName,student.lastName);
+			String filename = String.format("%d %s %s.txt",student.getId(),student.getFirstName(),student.getLastName());
 			FileWriter writer = new FileWriter(filename);
-			writer.write(String.format("Report for %s %s",student.firstName,student.lastName));
+			writer.write(String.format("Report for %s %s",student.getFirstName(),student.getLastName()));
 			writer.write("\r\n"); 			
 			writer.write("\r\n"); 
-			writer.write(String.format("Student Id	..........	%d",student.id));
+			writer.write(String.format("Student Id	..........	%d",student.getId()));
 			writer.write("\r\n"); 
-			writer.write(String.format("First Name	..........	%s",student.firstName));
+			writer.write(String.format("First Name	..........	%s",student.getFirstName()));
 			writer.write("\r\n"); 
-			writer.write(String.format("Last Name	..........	%s",student.lastName));
+			writer.write(String.format("Last Name	..........	%s",student.getLastName()));
 			writer.write("\r\n"); 
-			writer.write(String.format("Birth Date	..........	%s",student.birthDate));
+			writer.write(String.format("Birth Date	..........	%s",student.getBirthDate()));
 			writer.write("\r\n"); 
-			writer.write(String.format("Group		..........	%s",student.group));
+			writer.write(String.format("Group		..........	%s",student.getGroup()));
 			writer.write("\r\n"); 
 			writer.write("\r\n"); 
 			writer.write("Courses");
@@ -223,10 +222,11 @@ public class Menu
 			writer.write("\r\n");
 			for(Course course: student.results())
 			{
-				writer.write(String.format("%s	..........	%d",course.courseName,course.grade));
+				writer.write(String.format("%s	..........	%d",course.getCourseName(),course.getGrade()));
 				writer.write("\r\n"); 
 				
-				if(course.grade<55 || count>0)
+				//if count is more than 0 and grade is less than 55 you have not passed
+				if(course.getGrade()<55 || count>0)
 				{	
 					passed = "Not passed";
 					count++;
@@ -247,7 +247,8 @@ public class Menu
 			
 			writer.close();
 		}
-	}
+	}	
+	//back button method used throughout menu
 	public void backButton(Button button,Stage window, Account account)
 	{		
 		window.close();

@@ -1,15 +1,13 @@
 package Classes;
 
-import java.util.ArrayList;
-import Classes.UserInput;
 import Enum.AccessType;
 import javafx.collections.ObservableList;
 
 public class Account
 {
-	public String username;
-	public String password;
-	public AccessType accessType;
+	private String username;
+	private String password;
+	private AccessType accessType;
 	
 	public Account() {}
 	
@@ -18,7 +16,8 @@ public class Account
 		this.username = username;
 		this.password = password;
 		this.accessType = accessType;
-	}	
+	}
+	//if account details match test data, return true
 	public boolean login(ObservableList<Account> accounts,String username, String password)
 	{		
 		for(Account account: accounts)
@@ -30,6 +29,7 @@ public class Account
 		}
 		return false;
 	}
+	//If account details match, return account
 	public Account accessLevel(ObservableList<Account> accounts, String username, String password)
 	{
 		Account userAccount = new Account();		
@@ -42,19 +42,28 @@ public class Account
 		}
 		return userAccount;
 	}
-	/*public void accessLevel(Account userAccount)
-	{		
-		if(userAccount.accessType.equals(AccessType.BASIC))
-		{				
-			System.out.println(userAccount.accessType);
-		}
-		else if(userAccount.accessType == AccessType.EDITOR)
-		{
-			System.out.println(userAccount.accessType);
-		}
-		else
-		{
-			System.out.println(userAccount.accessType);
-		}		
-	}*/
+	public String getUsername()
+	{
+		return username;
+	}
+	public void setUsername(String username)
+	{
+		this.username = username;
+	}
+	public String getPassword()
+	{
+		return password;
+	}
+	public void setPassword(String password)
+	{
+		this.password = password;
+	}
+	public AccessType getAccessType()
+	{
+		return accessType;
+	}
+	public void setAccessType(AccessType accessType)
+	{
+		this.accessType = accessType;
+	}
 }

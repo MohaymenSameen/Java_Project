@@ -1,0 +1,20 @@
+Report for Lisa Jones
+
+Student Id	..........	4
+First Name	..........	Lisa
+Last Name	..........	Jones
+Birth Date	..........	04/29/2000
+Group		..........	IT-02-A
+
+Courses
+
+JAVA	..........	98
+CSHARP	..........	64
+PHP	..........	81
+PYTHON	..........	72
+
+
+Results
+
+Result	..........	You have Passed!!!
+Retakes	..........	0

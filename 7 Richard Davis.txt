@@ -1,0 +1,20 @@
+Report for Richard Davis
+
+Student Id	..........	7
+First Name	..........	Richard
+Last Name	..........	Davis
+Birth Date	..........	09/22/1997
+Group		..........	IT-02-A
+
+Courses
+
+JAVA	..........	51
+CSHARP	..........	64
+PHP	..........	39
+PYTHON	..........	59
+
+
+Results
+
+Result	..........	Not passed
+Retakes	..........	4

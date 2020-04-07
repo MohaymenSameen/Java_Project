@@ -1,0 +1,20 @@
+Report for Emma Smith
+
+Student Id	..........	1
+First Name	..........	Emma
+Last Name	..........	Smith
+Birth Date	..........	12/04/1997
+Group		..........	IT-02-A
+
+Courses
+
+JAVA	..........	54
+CSHARP	..........	50
+PHP	..........	66
+PYTHON	..........	54
+
+
+Results
+
+Result	..........	Not passed
+Retakes	..........	4

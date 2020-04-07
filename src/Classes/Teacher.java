@@ -1,9 +1,8 @@
 package Classes;
 
-
 public class Teacher extends Person
 {
-	public double salary;
+	private double salary;
 	
 	public Teacher(int id, String firstName, String lastName, String birthDate, double salary)
 	{

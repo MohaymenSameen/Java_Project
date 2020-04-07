@@ -1,0 +1,20 @@
+Report for Rick Moore
+
+Student Id	..........	10
+First Name	..........	Rick
+Last Name	..........	Moore
+Birth Date	..........	03/16/2000
+Group		..........	IT-02-A
+
+Courses
+
+JAVA	..........	96
+CSHARP	..........	87
+PHP	..........	55
+PYTHON	..........	82
+
+
+Results
+
+Result	..........	You have Passed!!!
+Retakes	..........	0

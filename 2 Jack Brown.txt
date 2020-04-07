@@ -1,0 +1,20 @@
+Report for Jack Brown
+
+Student Id	..........	2
+First Name	..........	Jack
+Last Name	..........	Brown
+Birth Date	..........	08/07/1993
+Group		..........	IT-02-A
+
+Courses
+
+JAVA	..........	72
+CSHARP	..........	68
+PHP	..........	43
+PYTHON	..........	95
+
+
+Results
+
+Result	..........	Not passed
+Retakes	..........	2

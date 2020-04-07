@@ -1,0 +1,20 @@
+Report for Michael Gracia
+
+Student Id	..........	3
+First Name	..........	Michael
+Last Name	..........	Gracia
+Birth Date	..........	11/01/1999
+Group		..........	IT-02-A
+
+Courses
+
+JAVA	..........	45
+CSHARP	..........	71
+PHP	..........	55
+PYTHON	..........	84
+
+
+Results
+
+Result	..........	Not passed
+Retakes	..........	4

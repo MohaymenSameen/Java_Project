@@ -1,0 +1,20 @@
+Report for John Miller
+
+Student Id	..........	5
+First Name	..........	John
+Last Name	..........	Miller
+Birth Date	..........	10/27/2001
+Group		..........	IT-02-A
+
+Courses
+
+JAVA	..........	100
+CSHARP	..........	94
+PHP	..........	99
+PYTHON	..........	93
+
+
+Results
+
+Result	..........	You have Passed!!!
+Retakes	..........	0
