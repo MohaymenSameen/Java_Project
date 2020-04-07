@@ -4,6 +4,7 @@ import java.io.FileWriter;
 import java.io.IOException;
 
 import Classes.Account;
+import Classes.Course;
 import Classes.MenuItem;
 import Classes.Student;
 import Classes.Teacher;
@@ -15,6 +16,7 @@ import javafx.event.EventHandler;
 import javafx.geometry.Insets;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.HBox;
@@ -57,18 +59,27 @@ public class Menu
 			}
 		});
 		Button downloadReports = new Button("Download Reports");
+		Label clicked = new Label();
 		downloadReports.setOnAction(new EventHandler<ActionEvent>()
 		{
 			public void handle(ActionEvent event)
 			{
-				displayStudents(window,account);				
+				try 
+				{					
+					downloadReports();
+					clicked.setText("Reports have been sucessfully downloaded");
+				} 
+				catch (IOException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}				
 			}
 		});
 		
 		if(account.accessType == AccessType.ADMIN)
 		{
 			
-			menu.getChildren().addAll(displayStudents,editStudents,displayTeachers,downloadReports);
+			menu.getChildren().addAll(displayStudents,editStudents,displayTeachers,downloadReports,clicked);
 		}	
 		else if(account.accessType == AccessType.EDITOR)
 		{
@@ -183,14 +194,58 @@ public class Menu
 		Scene scene = new Scene(form,600,400);
 		window.setScene(scene);
 	}	
-	public void downloadReports(Stage window,Account account) throws IOException
+	public void downloadReports() throws IOException
 	{
 		TestData data = new TestData();
 		ObservableList<Student> students = data.studentList();
 		for(Student student: students)
 		{
-			FileWriter writer = new FileWriter("{0}: ");
+			int count=0;
+			String passed="";
+			String filename = String.format("%d %s %s.txt",student.id,student.firstName,student.lastName);
+			FileWriter writer = new FileWriter(filename);
+			writer.write(String.format("Report for %s %s",student.firstName,student.lastName));
+			writer.write("\r\n"); 			
+			writer.write("\r\n"); 
+			writer.write(String.format("Student Id	..........	%d",student.id));
+			writer.write("\r\n"); 
+			writer.write(String.format("First Name	..........	%s",student.firstName));
+			writer.write("\r\n"); 
+			writer.write(String.format("Last Name	..........	%s",student.lastName));
+			writer.write("\r\n"); 
+			writer.write(String.format("Birth Date	..........	%s",student.birthDate));
+			writer.write("\r\n"); 
+			writer.write(String.format("Group		..........	%s",student.group));
+			writer.write("\r\n"); 
+			writer.write("\r\n"); 
+			writer.write("Courses");
+			writer.write("\r\n"); 
+			writer.write("\r\n");
+			for(Course course: student.results())
+			{
+				writer.write(String.format("%s	..........	%d",course.courseName,course.grade));
+				writer.write("\r\n"); 
+				
+				if(course.grade<55 || count>0)
+				{	
+					passed = "Not passed";
+					count++;
+				}
+				else
+				{
+					passed = "You have Passed!!!";
+				}
+			}
+			writer.write("\r\n");
+			writer.write("\r\n");
+			writer.write("Results");
+			writer.write("\r\n"); 
+			writer.write("\r\n");
+			writer.write(String.format("Result	..........	%s",passed));
+			writer.write("\r\n");
+			writer.write(String.format("Retakes	..........	%d",count));
 			
+			writer.close();
 		}
 	}
 	public void backButton(Button button,Stage window, Account account)
