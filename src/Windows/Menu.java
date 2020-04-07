@@ -47,50 +47,73 @@ public class Menu
 				displayTeachers(window,account);				
 			}
 		});
-		Button displayResults = new Button("Display Results");
-		displayResults.setOnAction(new EventHandler<ActionEvent>()
+		
+		if(account.accessType == AccessType.EDITOR)
 		{
-			public void handle(ActionEvent event)
+			Button editStudents = new Button("Add or Edit students");
+			editStudents.setOnAction(new EventHandler<ActionEvent>()
 			{
-				//displayResults(window);				
-			}
-		});
-		menu.getChildren().addAll(displayStudents,displayTeachers,displayResults);
+				public void handle(ActionEvent event)
+				{
+					editStudents(window,account);				
+				}
+			});
+			menu.getChildren().addAll(displayStudents,displayTeachers,editStudents);
+
+		}	
+		else
+		{
+			menu.getChildren().addAll(displayStudents,displayTeachers);
+		}
 		window.setScene(scene);
 		window.show();
 	}
 	public void displayStudents(Stage window, Account account)
 	{	
 		VBox form = new VBox();
-		Button back = new Button("Back");
 		
-		/*if(account.accessType == AccessType.BASIC)
-		{
-			System.out.println("Im a student!!");
-		}
-		else
-		{
-			System.out.println("Im not a student!!");
-		}*/
+		Button back = new Button("Back");			
 		back.setOnAction(actionEvent ->
 		{			
 			backButton(back,window,account);
-		});	
+		});
+		
 		form.setPadding(new Insets(10,10,10,10));
 		form.setSpacing(10);
 		TestData data = new TestData();
 		ObservableList<Student> db = data.studentList();		
-		ObservableList<Account> accounts = data.accountList();
+		MenuItem dis = new MenuItem();		
+		TableView<Student> view = dis.displayStudent(db,account);		
+		
+		
+		form.getChildren().addAll(view,back);
+		Scene scene = new Scene(form,600,600);
+		window.setScene(scene);		
+	}
+	public void editStudents(Stage window, Account account)
+	{		
+		VBox form = new VBox();
+		Button back = new Button("Back");
+		TestData data = new TestData();
+		ObservableList<Student> db = data.studentList();		
 		MenuItem dis = new MenuItem();
+		TableView<Student> view = dis.displayStudent(db,account);			
+		
+		view.setEditable(true);	
+		
+		back.setOnAction(actionEvent ->
+		{			
+			backButton(back,window,account);
+		});	
+		
+		form.setPadding(new Insets(10,10,10,10));
+		form.setSpacing(10);
+		
 		Button add = new Button("Add");
 		Button delete = new Button("delete");
 		
 		TextField idInput = new TextField();
 		idInput.setPromptText("ID");
-		//TextField userNameInput = new TextField();
-		//userNameInput.setPromptText("User name");
-		//PasswordField passwordInput = new PasswordField();
-		//passwordInput.setPromptText("Password");
 		TextField firstNameInput = new TextField();
 		firstNameInput.setPromptText("First name");
 		TextField lastNameInput = new TextField();
@@ -98,28 +121,20 @@ public class Menu
 		TextField birthDateInput = new TextField();
 		birthDateInput.setPromptText("Date Of Birth (MM/DD/YYYY)");
 		TextField groupInput = new TextField();
-		groupInput.setPromptText("group");
-		TableView<Student> view = dis.displayStudent(db,account);	
-		view.setEditable(true);		
-	                
+		groupInput.setPromptText("group");    
+		
 		add.setOnAction(actionEvent ->
 		{
-			int id = Integer.parseInt(idInput.getText());
-			//String userName = userNameInput.getText();
-			//String password = passwordInput.getText();
+			int id = Integer.parseInt(idInput.getText());			
 			String firstName = firstNameInput.getText();
 			String lastName = lastNameInput.getText();
 			String birthDate = birthDateInput.getText();
 			String group = groupInput.getText();			
 			Student student = new Student(id,firstName,lastName,birthDate,group);
-			//Account account = new Account(userName,password,AccessType.BASIC);
 			 
 			view.getItems().add(student);
-			//accounts.add(account);
 			
-			idInput.clear();
-			//userNameInput.clear();
-			//passwordInput.clear();
+			idInput.clear();			
 			firstNameInput.clear();
 			lastNameInput.clear();
 			birthDateInput.clear();
@@ -129,9 +144,10 @@ public class Menu
 		{			
 			db.remove(view.getSelectionModel().getSelectedItem());			
 		});	
+		
 		form.getChildren().addAll(view,idInput,firstNameInput,lastNameInput,birthDateInput,groupInput,add,delete,back);
 		Scene scene = new Scene(form,600,600);
-		window.setScene(scene);		
+		window.setScene(scene);	
 	}
 	/*public void displayResults(Stage window)
 	{	

@@ -22,31 +22,32 @@ public class MenuItem
 {
 	TableView<Student> tableView = new TableView<>();
 	public TableView<Student> displayStudent(ObservableList<Student> students, Account account)
-	{	
-		tableView.setEditable(true);
-		tableView.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
-		
+	{		
+		tableView.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);		
 		TableColumn<Student, Integer> id = new TableColumn<>("Id");
 		id.setCellValueFactory(new PropertyValueFactory<>("id"));
 		
 		TableColumn<Student, String> firstName = new TableColumn<>("First Name");
-		firstName.setCellValueFactory(new PropertyValueFactory<>("firstName"));
-		editFirstName(firstName);
+		firstName.setCellValueFactory(new PropertyValueFactory<>("firstName"));		
 		
 		TableColumn<Student, String> lastName = new TableColumn<>("Last Name");
-		lastName.setCellValueFactory(new PropertyValueFactory<>("lastName"));
-		editLastName(lastName);
+		lastName.setCellValueFactory(new PropertyValueFactory<>("lastName"));		
 		
 		TableColumn<Student, String> dateOfBirth = new TableColumn<>("Date Of Birth");
-		dateOfBirth.setCellValueFactory(new PropertyValueFactory<>("birthDate"));
-		editDateOfBirth(dateOfBirth);
+		dateOfBirth.setCellValueFactory(new PropertyValueFactory<>("birthDate"));		
 		
 		TableColumn<Student, String> group = new TableColumn<>("Group");			
-		group.setCellValueFactory(new PropertyValueFactory<>("group"));		
-		editGroup(group);		
+		group.setCellValueFactory(new PropertyValueFactory<>("group"));					
 		
 		if(account.accessType == AccessType.EDITOR )
 		{
+			tableView.setEditable(true);
+			
+			editFirstName(firstName);
+			editLastName(lastName);
+			editDateOfBirth(dateOfBirth);
+			editGroup(group);
+			
 			TableColumn<Student, Integer> java = new TableColumn<>("Java");			
 			java.setCellValueFactory(new PropertyValueFactory<>("gradeJava"));			
 			editJavaGrade(java);
@@ -63,7 +64,7 @@ public class MenuItem
 			python.setCellValueFactory(new PropertyValueFactory<>("gradePython"));			
 			editPythonGrade(python);
 			
-			tableView.getColumns().addAll(java,csharp,php,python);	
+			tableView.getColumns().addAll(id,firstName,lastName,dateOfBirth,group,java,csharp,php,python);	
 			tableView.setItems(students);
 		}
 		else
@@ -71,8 +72,6 @@ public class MenuItem
 			tableView.getColumns().addAll(id,firstName,lastName,dateOfBirth,group);				
 			tableView.setItems(students);
 		}
-		
-		
 		
 		return tableView;		
 	}	
