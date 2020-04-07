@@ -1,26 +1,19 @@
 package Classes;
-
-
 import javafx.scene.control.TableColumn.CellEditEvent;
-import java.text.SimpleDateFormat;
-import java.util.ArrayList;
-import java.util.Date;
 import Classes.Student;
 import Enum.AccessType;
 import javafx.collections.ObservableList;
-import javafx.scene.control.Label;
 import javafx.scene.control.SelectionMode;
 import javafx.scene.control.TableColumn;
-import javafx.scene.control.TablePosition;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.control.cell.TextFieldTableCell;
-import javafx.scene.input.KeyCode;
 import javafx.util.converter.IntegerStringConverter;
 
 public class MenuItem
 {
 	TableView<Student> tableView = new TableView<>();
+	@SuppressWarnings("unchecked")
 	public TableView<Student> displayStudent(ObservableList<Student> students, Account account)
 	{		
 		tableView.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);		
@@ -39,7 +32,7 @@ public class MenuItem
 		TableColumn<Student, String> group = new TableColumn<>("Group");			
 		group.setCellValueFactory(new PropertyValueFactory<>("group"));					
 		
-		if(account.accessType == AccessType.EDITOR )
+		if(account.accessType == AccessType.EDITOR || account.accessType == AccessType.ADMIN)
 		{
 			tableView.setEditable(true);
 			
@@ -74,49 +67,7 @@ public class MenuItem
 		}
 		
 		return tableView;		
-	}	
-	/*public TableView<Student> displayResults(ObservableList<Student> students)
-	{	
-		tableView.setEditable(true);				
-		tableView.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
-		
-		TableColumn<Student, Integer> id = new TableColumn<>("Id");
-		id.setCellValueFactory(new PropertyValueFactory<>("id"));
-		
-		TableColumn<Student, String> firstName = new TableColumn<>("First Name");
-		firstName.setCellValueFactory(new PropertyValueFactory<>("firstName"));
-		
-		TableColumn<Student, String> lastName = new TableColumn<>("Last Name");
-		lastName.setCellValueFactory(new PropertyValueFactory<>("lastName"));
-		
-		TableColumn<Student, String> dateOfBirth = new TableColumn<>("Date Of Birth");
-		dateOfBirth.setCellValueFactory(new PropertyValueFactory<>("birthDate"));
-		
-		TableColumn<Student, String> group = new TableColumn<>("Group");			
-		group.setCellValueFactory(new PropertyValueFactory<>("group"));		
-		
-		TableColumn<Student, Integer> java = new TableColumn<>("Java");			
-		java.setCellValueFactory(new PropertyValueFactory<>("gradeJava"));			
-		editJavaGrade(java);
-		
-		TableColumn<Student, Integer> csharp = new TableColumn<>("C#");			
-		csharp.setCellValueFactory(new PropertyValueFactory<>("gradeCsharp"));		
-		editCsharpGrade(csharp);
-		
-		TableColumn<Student, Integer> php = new TableColumn<>("Php");			
-		php.setCellValueFactory(new PropertyValueFactory<>("gradePhp"));	
-		editPhpGrade(php);
-		
-		TableColumn<Student, Integer> python = new TableColumn<>("Python");			
-		python.setCellValueFactory(new PropertyValueFactory<>("gradePython"));			
-		editPythonGrade(python);
-		
-		tableView.getColumns().addAll(id,firstName,lastName,dateOfBirth,group,java,csharp,php,python);
-		
-		tableView.setItems(students);
-		
-		return tableView;		
-	}*/
+	}		
 	public TableView<Teacher> displayTeacher(ObservableList<Teacher> teachers)
 	{	
 		TableView<Teacher> tableView = new TableView<>();
@@ -137,8 +88,7 @@ public class MenuItem
 		
 		tableView.setItems(teachers);
 		
-		return tableView;
-		
+		return tableView;		
 	}	
 	public void editFirstName(TableColumn<Student,String> firstName)
 	{

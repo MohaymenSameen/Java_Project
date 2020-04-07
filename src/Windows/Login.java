@@ -1,10 +1,6 @@
 package Windows;
 
-import java.util.ArrayList;
-
 import Classes.Account;
-import Classes.Person;
-import Enum.AccessType;
 import Test.TestData;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -25,8 +21,7 @@ public class Login
 	{
 		TestData data = new TestData();
 		ObservableList<Account> accounts = data.accountList();
-		Account account = new Account();
-		Person person = new Person();
+		Account account = new Account();		
 		Stage window = new Stage();
 		window.setTitle("Login Screen");
 

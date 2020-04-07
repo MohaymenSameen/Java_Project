@@ -38,8 +38,7 @@ public class Student extends Person
 		results.add(new Course(CourseType.PHP,gradePhp));
 		results.add(new Course(CourseType.PYTHON,gradePython));		
 		return results;
-	}
-	
+	}	
 	public int getGradeJava()
 	{
 		return gradeJava;

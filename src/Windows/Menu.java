@@ -1,5 +1,7 @@
 package Windows;
 
+import java.io.FileWriter;
+
 import Classes.Account;
 import Classes.MenuItem;
 import Classes.Student;
@@ -12,8 +14,6 @@ import javafx.event.EventHandler;
 import javafx.geometry.Insets;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
-import javafx.scene.control.Label;
-import javafx.scene.control.PasswordField;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.HBox;
@@ -47,24 +47,38 @@ public class Menu
 				displayTeachers(window,account);				
 			}
 		});
-		
-		if(account.accessType == AccessType.EDITOR)
+		Button editStudents = new Button("Add or Edit students");
+		editStudents.setOnAction(new EventHandler<ActionEvent>()
 		{
-			Button editStudents = new Button("Add or Edit students");
-			editStudents.setOnAction(new EventHandler<ActionEvent>()
+			public void handle(ActionEvent event)
 			{
-				public void handle(ActionEvent event)
-				{
-					editStudents(window,account);				
-				}
-			});
-			menu.getChildren().addAll(displayStudents,displayTeachers,editStudents);
-
+				editStudents(window,account);				
+			}
+		});
+		Button downloadReports = new Button("Download Reports");
+		downloadReports.setOnAction(new EventHandler<ActionEvent>()
+		{
+			public void handle(ActionEvent event)
+			{
+				displayStudents(window,account);				
+			}
+		});
+		
+		if(account.accessType == AccessType.ADMIN)
+		{
+			
+			menu.getChildren().addAll(displayStudents,editStudents,displayTeachers,downloadReports);
 		}	
+		else if(account.accessType == AccessType.EDITOR)
+		{
+			
+			menu.getChildren().addAll(displayStudents,displayTeachers,editStudents);
+		}
 		else
 		{
 			menu.getChildren().addAll(displayStudents,displayTeachers);
 		}
+		
 		window.setScene(scene);
 		window.show();
 	}
@@ -148,40 +162,7 @@ public class Menu
 		form.getChildren().addAll(view,idInput,firstNameInput,lastNameInput,birthDateInput,groupInput,add,delete,back);
 		Scene scene = new Scene(form,600,600);
 		window.setScene(scene);	
-	}
-	/*public void displayResults(Stage window)
-	{	
-		VBox form = new VBox();
-		Button back = new Button("Back");
-		back.setOnAction(actionEvent ->
-		{			
-			backButton(back,window);
-		});	
-		form.setPadding(new Insets(10,10,10,10));
-		form.setSpacing(10);
-		TestData data = new TestData();
-		ObservableList<Student> db = data.studentList();		
-		MenuItem dis = new MenuItem();	
-		
-		Label java = new Label("Java Grade");
-		TextField javaGradeInput = new TextField();
-				
-		Label csharp = new Label("C# Grade");
-		TextField csharpGradeInput = new TextField();
-		
-		Label php = new Label("Php Grade");
-		TextField phpGradeInput = new TextField();
-		
-		Label python = new Label("Python Grade");		
-		TextField pythonGradeInput = new TextField();
-		
-		//TableView<Student> view = dis.displayResults(db);	
-		
-		
-		form.getChildren().addAll(java,javaGradeInput,csharp,csharpGradeInput,php,phpGradeInput,python,pythonGradeInput,back);
-		Scene scene = new Scene(form,600,600);
-		window.setScene(scene);		
-	}*/
+	}	
 	public void displayTeachers(Stage window,Account account)
 	{
 		HBox form = new HBox();
@@ -201,6 +182,16 @@ public class Menu
 		Scene scene = new Scene(form,600,400);
 		window.setScene(scene);
 	}	
+	public void downloadReports(Stage window,Account account)
+	{
+		TestData data = new TestData();
+		ObservableList<Student> students = data.studentList();
+		for(Student student: students)
+		{
+			FileWriter writer = new FileWriter(student.firstName);
+			
+		}
+	}
 	public void backButton(Button button,Stage window, Account account)
 	{		
 		window.close();
