@@ -1,6 +1,7 @@
 package Windows;
 
 import java.io.FileWriter;
+import java.io.IOException;
 
 import Classes.Account;
 import Classes.MenuItem;
@@ -182,13 +183,13 @@ public class Menu
 		Scene scene = new Scene(form,600,400);
 		window.setScene(scene);
 	}	
-	public void downloadReports(Stage window,Account account)
+	public void downloadReports(Stage window,Account account) throws IOException
 	{
 		TestData data = new TestData();
 		ObservableList<Student> students = data.studentList();
 		for(Student student: students)
 		{
-			FileWriter writer = new FileWriter(student.firstName);
+			FileWriter writer = new FileWriter("{0}: ");
 			
 		}
 	}
