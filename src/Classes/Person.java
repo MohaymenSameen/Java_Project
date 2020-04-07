@@ -61,27 +61,7 @@ public class Person
 	public void setAccount(Account account)
 	{
 		this.account = account;
-	}
-	public Person accessLevel(ObservableList<Account> accounts)
-	{
-		Person person = new Person();
-		for(Account account: accounts)
-		{
-			if(account.accessType == AccessType.BASIC)
-			{
-				person.account.accessType = AccessType.BASIC;		
-			}
-			else if(account.accessType == AccessType.EDITOR)
-			{
-				person.account.accessType = AccessType.EDITOR;
-			}
-			else
-			{
-				person.account.accessType = AccessType.ADMIN;
-			}
-		}
-		return person;		
-	}
+	}	
 	/*public int getAge(String birthDate)
 	{		
 		String patten = "mm-dd-yyyy";

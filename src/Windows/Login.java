@@ -58,34 +58,23 @@ public class Login
 		login.setOnAction(new EventHandler<ActionEvent>()
 		{
 			public void handle(ActionEvent event)
-			{
-				boolean loggedIn = account.login(accounts,usertext.getText(),passwordField.getText());	
+			{	
+				boolean loggedIn = account.login(accounts, usertext.getText(), passwordField.getText());
 				if(loggedIn == true)
 				{
 					window.close();
-					Menu menu = new Menu();
-					menu.menuDisplay(account);
-					
-					if(true)
-					{
-						account.accessLevel(accounts, person);
-						System.out.println("Im a student!!");
-					}
-					else
-					{		
-						account.accessLevel(accounts, person);
-						System.out.println("Im not a student!!");
-					}
+					Menu menu = new Menu();	
+					Account userAccount = account.accessLevel(accounts, usertext.getText(), passwordField.getText());	
+					System.out.println(userAccount.accessType);
+					menu.menuDisplay(userAccount);
 				}
 				else 
 				{
 					logIn.setText("Wrong Email/Password Combination");
-				} 
-				
+				}				
 			}
 		});
-		gridpane.getChildren().addAll(username,usertext,passField,passwordField,login,logIn);
-		
+		gridpane.getChildren().addAll(username,usertext,passField,passwordField,login,logIn);		
 		window.setScene(scene);
 		window.show();		
 	}

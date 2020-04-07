@@ -14,6 +14,7 @@ public class Student extends Person
 	public int gradePhp;
 	public int gradePython;
 	
+	public Student() {};
 	public Student(int id,String firstName,String lastName,String birthDate,String group)
 	{
 		super(id,firstName,lastName,birthDate);

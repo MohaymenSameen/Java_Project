@@ -25,9 +25,36 @@ public class Account
 		{
 			if(account.username.equals(username) && account.password.equals(password))
 			{
-				return true;
+				return true;			
 			}			
 		}
 		return false;
-	}	
+	}
+	public Account accessLevel(ObservableList<Account> accounts, String username, String password)
+	{
+		Account userAccount = new Account();		
+		for(Account account: accounts)
+		{
+			if(account.username.equals(username) && account.password.equals(password))
+			{
+				userAccount = account;			
+			}
+		}
+		return userAccount;
+	}
+	/*public void accessLevel(Account userAccount)
+	{		
+		if(userAccount.accessType.equals(AccessType.BASIC))
+		{				
+			System.out.println(userAccount.accessType);
+		}
+		else if(userAccount.accessType == AccessType.EDITOR)
+		{
+			System.out.println(userAccount.accessType);
+		}
+		else
+		{
+			System.out.println(userAccount.accessType);
+		}		
+	}*/
 }

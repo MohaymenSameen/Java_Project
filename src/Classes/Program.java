@@ -10,7 +10,10 @@ public class Program extends Application
 	public static void main(String[] args)
 	{
 		launch();	
-		
+		/*TestData data = new TestData();
+		ObservableList<Account> accounts = data.accountList();		
+		Account account = new Account();
+		account.accessLevel(accounts);		*/
 	}
 	public void start(Stage window) throws Exception
 	{
