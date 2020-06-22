@@ -2,6 +2,7 @@ package Windows;
 
 import java.io.FileWriter;
 
+
 import java.io.IOException;
 import Classes.Account;
 import Classes.Course;
@@ -11,6 +12,8 @@ import Classes.Teacher;
 import Enum.AccessType;
 import Test.TestData;
 import javafx.collections.ObservableList;
+import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.geometry.Insets;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
@@ -19,8 +22,11 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
+import javafx.scene.text.Text;
+import javafx.stage.Modality;
 import javafx.stage.Stage;
-
+import javafx.stage.WindowEvent;
+import nl.inholland.exam.AboutMenu;
 public class Menu
 {
 	//main menu
@@ -32,6 +38,19 @@ public class Menu
 		Scene scene = new Scene(menu,600,400);
 		menu.setPadding(new Insets(10,10,10,10));
 		menu.setSpacing(10);
+		
+		
+		
+		//Question Exam number 3
+		window.setOnCloseRequest(new EventHandler<WindowEvent>()
+		{
+	          public void handle(WindowEvent we) 
+	          {
+	              close(window);
+	          }
+		});
+		
+		
 		
 		//displaying students
 		Button displayStudents = new Button("Display Students");
@@ -54,7 +73,17 @@ public class Menu
 		{			
 			editStudents(window,account);			
 		});
-		
+		Button about = new Button("About");
+		about.setOnAction(actionEvent->
+		{		
+			AboutMenu aboutMenu = new AboutMenu();
+			try {
+				aboutMenu.Menu();
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}			
+		});
 		//downloading reports for students
 		Button downloadReports = new Button("Download Reports");
 		Label clicked = new Label();
@@ -74,20 +103,39 @@ public class Menu
 		//If condition for account accesstype with various functionalities
 		if(account.getAccessType() == AccessType.ADMIN)
 		{			
-			menu.getChildren().addAll(displayStudents,editStudents,displayTeachers,downloadReports,clicked);
+			menu.getChildren().addAll(displayStudents,editStudents,displayTeachers,downloadReports,clicked,about);
 		}	
 		else if(account.getAccessType() == AccessType.EDITOR)
 		{			
-			menu.getChildren().addAll(displayStudents,displayTeachers,editStudents);
+			menu.getChildren().addAll(displayStudents,displayTeachers,editStudents,about);
 		}
 		else
 		{
-			menu.getChildren().addAll(displayStudents,displayTeachers);
+			menu.getChildren().addAll(displayStudents,displayTeachers,about);
 		}
 		
 		window.setScene(scene);
 		window.show();
 	}
+	//Question Exam Number 3;
+	public void close(final Stage primaryStage) {
+	    Button btn = new Button();
+	    btn.setText("Close the window?");
+	    btn.setOnAction(
+	        new EventHandler<ActionEvent>() {
+	            @Override
+	            public void handle(ActionEvent event) {
+	                final Stage dialog = new Stage();
+	                dialog.initModality(Modality.APPLICATION_MODAL);
+	                dialog.initOwner(primaryStage);
+	                VBox dialogVbox = new VBox(20);
+	                dialogVbox.getChildren().add(new Text("This is a Dialog"));
+	                Scene dialogScene = new Scene(dialogVbox, 300, 200);
+	                dialog.setScene(dialogScene);
+	                dialog.show();
+	            }
+	         });
+	    }
 	public void displayStudents(Stage window, Account account)
 	{	
 		VBox form = new VBox();
@@ -253,5 +301,5 @@ public class Menu
 	{		
 		window.close();
 		menuDisplay(account);		
-	}
+	}	
 }
